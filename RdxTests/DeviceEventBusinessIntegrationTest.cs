@@ -8,7 +8,6 @@ using RdxServer.Repositories;
 using RdxServer.Repositories.Interfaces;
 using RdxServer.Validators;
 using RdxServer.Validators.Interfaces;
-using RdxTests.TestHelpers;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,7 +48,8 @@ namespace RdxTests
 
             var response = business.ProcessEvent(request).Result;
 
-            var dvcEvts = repository.FindBy(d => d.ValueType == "STR").Result.ToList();
+            string[] tagSplit = testTag.Split('.');
+            var dvcEvts = repository.FindBy(d => d.Country == tagSplit[0] && d.Region == tagSplit[1] && d.DeviceName == tagSplit[2] && d.ValueType == "STR").Result.ToList();
 
             Assert.IsTrue(dvcEvts.Any());
             Assert.AreEqual("success", response.ShortMessage);
@@ -65,7 +65,8 @@ namespace RdxTests
 
             var response = business.ProcessEvent(request).Result;
 
-            var dvcEvts = repository.FindBy(d => d.ValueType == "INT").Result.ToList();
+            string[] tagSplit = testTag.Split('.');
+            var dvcEvts = repository.FindBy(d => d.Country == tagSplit[0] && d.Region == tagSplit[1] && d.DeviceName == tagSplit[2] && d.ValueType == "INT").Result.ToList();
 
             Assert.IsTrue(dvcEvts.Any());
 
@@ -82,11 +83,11 @@ namespace RdxTests
             request.Valor = "";
 
             var response = business.ProcessEvent(request).Result;
+            
+            string[] tagSplit = testTag.Split('.');
+            var dvcEvts = repository.FindBy(d => d.Country == tagSplit[0] && d.Region == tagSplit[1] && d.DeviceName == tagSplit[2] && d.Status == 1).Result.ToList();
 
-            var dvcEvts = repository.FindBy(d => d.DeviceName == "testSensor01").Result.ToList();
-
-            Assert.IsTrue(dvcEvts.Where(d => d.Status == 1).Any());
-
+            Assert.IsTrue(dvcEvts.Any());
             Assert.AreEqual("success", response.ShortMessage);
 
         }
