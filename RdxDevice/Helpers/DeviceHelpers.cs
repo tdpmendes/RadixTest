@@ -1,12 +1,13 @@
-﻿using System;
+﻿using RdxDevice.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RdxServer.Business.Helpers
+namespace RdxDevice.Helpers
 {
-    public static class DateTimeHelper
+    public class DeviceHelpers
     {
         public static DateTime FromUnixTimeStamp(long unixTime)
         {
@@ -20,5 +21,9 @@ namespace RdxServer.Business.Helpers
             return (long)(date - sTime).TotalSeconds;
         }
 
+        public static string TagFromConfig(RdxDeviceConfig config)
+        {
+            return string.Concat(config.Country, ".", config.Region, ".", config.DeviceName);
+        }
     }
 }

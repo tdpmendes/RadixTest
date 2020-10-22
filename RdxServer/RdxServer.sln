@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RdxServer", "RdxServer.csproj", "{3D13EB46-EABA-41F0-9777-A263F475A640}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RdxTests", "..\RdxTests\RdxTests.csproj", "{4277D299-0932-4818-BD20-C619692C292F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RdxTests", "..\RdxTests\RdxTests.csproj", "{4277D299-0932-4818-BD20-C619692C292F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RdxDevice", "..\RdxDevice\RdxDevice.csproj", "{7CD0A605-26F1-4D6C-935A-67D7ADA65A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4277D299-0932-4818-BD20-C619692C292F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4277D299-0932-4818-BD20-C619692C292F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4277D299-0932-4818-BD20-C619692C292F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD0A605-26F1-4D6C-935A-67D7ADA65A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD0A605-26F1-4D6C-935A-67D7ADA65A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD0A605-26F1-4D6C-935A-67D7ADA65A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD0A605-26F1-4D6C-935A-67D7ADA65A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
