@@ -96,7 +96,6 @@ namespace RdxTests
         public void CleanUp()
         {
             string[] tagSplit = testTag.Split('.');
-
             var dvcEvts = repository.DeleteMany(d => d.Country == tagSplit[0] && d.Region == tagSplit[1] && d.DeviceName == tagSplit[2]);
         }
     }
