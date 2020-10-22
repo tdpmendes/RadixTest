@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RdxServer.Business;
+using RdxServer.Business.Interfaces;
+using RdxServer.Business.Response;
+using RdxServer.DTO;
 
 namespace RdxServer.Controllers
 {
@@ -10,6 +14,11 @@ namespace RdxServer.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
+        private IEventBusiness _business;
+        public EventsController(IEventBusiness business)
+        {
+            _business = business;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -24,22 +33,25 @@ namespace RdxServer.Controllers
             return "value";
         }
 
-        // POST api/values
+        // POST api/events
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<DeviceEventDTO>> Post([FromBody] DeviceEventDTO dvcEvt)
         {
+            if (dvcEvt != null)
+            {
+                int value;
+                int.TryParse(dvcEvt.Valor, out value);
+                
+                EventBusinessResponseVO response;
+                response = await _business.ProcessEvent(dvcEvt);
+                
+                return Ok(response);
+            } 
+            else
+            {
+                return BadRequest(dvcEvt);
+            }
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

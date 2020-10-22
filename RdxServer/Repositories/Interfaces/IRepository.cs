@@ -15,8 +15,10 @@ namespace RdxServer.Repositories.Interfaces
         Task<IEnumerable<TEntity>> GetAll();
         Task Update(TEntity entity);
         Task Delete(int Id);
+
         Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate);
         Task<int> SaveChanges();
+        int DeleteMany(Expression<Func<TEntity, bool>> predicate);
     }
 
 }

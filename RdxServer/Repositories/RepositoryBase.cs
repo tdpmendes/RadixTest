@@ -66,5 +66,10 @@ namespace RdxServer.Repositories
         {
             Db?.Dispose();
         }
+
+        public int DeleteMany(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.AsNoTracking().Where(predicate).DeleteFromQuery<TEntity>();
+        }
     }
 }

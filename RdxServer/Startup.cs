@@ -74,7 +74,7 @@ namespace RdxServer
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseGlobalizationConfig();
 
