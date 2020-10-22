@@ -54,8 +54,6 @@ namespace RdxDevice
             message.Valor = rand.Next(min, max).ToString();
 
             HttpResponseMessage response = client.PostAsync(rdxApiSettingsConfig.ApiRoute, new StringContent(JsonConvert.SerializeObject(message),Encoding.UTF8,"application/json")).Result;
-
-            Console.ReadKey();
         }
     }
 }
