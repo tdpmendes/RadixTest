@@ -12,13 +12,13 @@ namespace RdxDevice.Helpers
         public static DateTime FromUnixTimeStamp(long unixTime)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return sTime.AddSeconds(unixTime);
+            return sTime.AddMilliseconds(unixTime);
         }
 
         public static long ToUnixTimeStamp(DateTime date)
         {
             DateTime sTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return (long)(date - sTime).TotalSeconds;
+            return (long)(date - sTime).TotalMilliseconds;
         }
 
         public static string TagFromConfig(RdxDeviceConfig config)
