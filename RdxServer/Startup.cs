@@ -52,7 +52,14 @@ namespace RdxServer
            //services.AddAutoMapper(typeof(Startup));
 
             services.AddMvcConfiguration();
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { 
+                    Version = "v1",
+                    Title = "Rdx Server API",
+                    Description = "Rdx Event Server"
+                });
+            });
             services.ResolveDependencies();
         }
 
@@ -69,6 +76,13 @@ namespace RdxServer
                 app.UseExceptionHandler("/erro/{0}");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI( c=>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RdxServerAPI");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
