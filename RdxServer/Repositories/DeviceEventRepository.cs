@@ -20,11 +20,6 @@ namespace RdxServer.Repositories
 
         }
 
-        public void Dispose()
-        {
-            base.Dispose();
-            this.Dispose();
-        }
 
         public async Task<IEnumerable<DeviceEvent>> FindBy(Expression<Func<DeviceEvent, bool>> predicate)
         {
