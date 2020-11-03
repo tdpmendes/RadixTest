@@ -1,6 +1,6 @@
 # RdxFront (rdx-front)
 
-Front-end for Radix Test
+A Quasar Framework app
 
 ## Install the dependencies
 ```bash
