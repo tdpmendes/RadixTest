@@ -2,8 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    :to="link"
   >
     <q-item-section
       v-if="icon"
@@ -37,7 +36,7 @@ export default {
 
     link: {
       type: String,
-      default: '#'
+      default: ''
     },
 
     icon: {
@@ -47,3 +46,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .q-drawer {
+    .q-router-link--exact-active{
+      color: rgb(248, 192, 87) !important
+    }
+  }
+</style>

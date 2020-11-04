@@ -38,10 +38,10 @@ export default {
           legend: {},
           tooltip: {},
           dataset: {
-            dimensions: ['device', 'events'],
+            dimensions: ['label', 'events'],
             source: [
-              { device: 'brasil.sudeste.sensor01', events: 700 },
-              { device: 'brasil.sudeste.sensor02', events: 300 }
+              { label: 'brasil.sudeste.sensor01', events: 700 },
+              { label: 'brasil.sudeste.sensor02', events: 300 }
             ]
           },
           xAxis:
@@ -66,10 +66,10 @@ export default {
           legend: {},
           tooltip: {},
           dataset: {
-            dimensions: ['device', 'events'],
+            dimensions: ['label', 'events'],
             source: [
-              { device: 'brasil.sudeste', events: 1000 },
-              { device: 'brasil.sul', events: 1500 }
+              { label: 'brasil.sudeste', events: 1000 },
+              { label: 'brasil.sul', events: 1500 }
             ]
           },
           xAxis:

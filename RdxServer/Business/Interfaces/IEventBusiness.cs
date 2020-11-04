@@ -12,5 +12,7 @@ namespace RdxServer.Business.Interfaces
     public interface IEventBusiness
     {
         Task<EventBusinessResponseVO> ProcessEvent(DeviceEventDTO dvcEvt);
+        Task<EventGraphDTO> GetReports();
+
     }
 }

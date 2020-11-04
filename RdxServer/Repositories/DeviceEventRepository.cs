@@ -32,5 +32,26 @@ namespace RdxServer.Repositories
             return await SaveChanges();
         }
 
+        public async Task<IEnumerable<ReportEntry>> EventsBySensor()
+        {
+            return await Db.DeviceEvent.Where(d => d.ValueType.Equals("INT"))
+                                       .GroupBy(d => new { d.Country, d.Region, d.DeviceName })
+                                       .Select(d => new ReportEntry() {
+                                           Label = string.Concat(d.Key.Country, ".", d.Key.Region, ".", d.Key.DeviceName),
+                                           Events = d.Sum(k => int.Parse(k.Value))
+                                        }).ToListAsync();
+        }
+        public async Task<IEnumerable<ReportEntry>> EventsByRegion()
+        {
+
+            return await Db.DeviceEvent.Where(d => d.ValueType.Equals("INT"))
+                                       .GroupBy(d => new { d.Country, d.Region })
+                                       .Select(d => new ReportEntry()
+                                       {
+                                           Label = string.Concat(d.Key.Country, ".", d.Key.Region),
+                                           Events = d.Sum(k => int.Parse(k.Value))
+                                       }).ToListAsync();
+        }
+
     }
 }

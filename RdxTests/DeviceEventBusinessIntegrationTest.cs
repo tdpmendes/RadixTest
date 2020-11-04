@@ -92,6 +92,22 @@ namespace RdxTests
 
         }
 
+        [Test]
+        public void should_return_events_by_device()
+        {
+            var list = repository.EventsBySensor().Result;
+
+            Assert.IsTrue(list.Any());
+        }
+
+        [Test]
+        public void should_return_events_by_region()
+        {
+            var list = repository.EventsByRegion().Result;
+
+            Assert.IsTrue(list.Any());
+        }
+
         [OneTimeTearDown]
         public void CleanUp()
         {

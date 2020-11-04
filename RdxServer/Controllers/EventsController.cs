@@ -53,5 +53,13 @@ namespace RdxServer.Controllers
             }
         }
 
+        // GET api/report
+        [HttpGet("/report")]
+        public async Task<ActionResult<EventGraphDTO>> Report()
+        {
+            EventGraphDTO eventGraph = await _business.GetReports();
+
+            return Ok(eventGraph);
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace RdxServer.Repositories.Interfaces
         Task<int> SaveEvent(DeviceEvent evt);
 
         Task<IEnumerable<DeviceEvent>> FindBy(Expression<Func<DeviceEvent, bool>> predicate);
+        Task<IEnumerable<ReportEntry>> EventsBySensor();
+        Task<IEnumerable<ReportEntry>> EventsByRegion();
     }
 }

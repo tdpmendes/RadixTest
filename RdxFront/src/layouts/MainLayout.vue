@@ -20,7 +20,6 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
       bordered
       content-class="bg-grey-1"
     >
@@ -29,7 +28,7 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Menu
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -50,10 +49,16 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksData = [
   {
+    title: 'Home Page',
+    caption: 'Sobre o autor e a solução',
+    icon: 'home',
+    link: '/'
+  },
+  {
     title: 'Events',
-    caption: 'View data about Events',
+    caption: 'Ver gráficos de eventos',
     icon: 'analytics',
-    link: '/#/events'
+    link: 'events'
   }
 ]
 

@@ -27,6 +27,14 @@ namespace RdxServer.Business
             _dvcEvtRepository = dvcEvtRepository;
         }
 
+        public async Task<EventGraphDTO> GetReports()
+        {
+            EventGraphDTO report = new EventGraphDTO();
+            report.eventsByRegion = _dvcEvtRepository.EventsByRegion().Result.ToList();
+            report.eventsBySensor = _dvcEvtRepository.EventsBySensor().Result.ToList();
+            return report;
+        }
+
         public async Task<EventBusinessResponseVO> ProcessEvent(DeviceEventDTO dvcEvtDTO)
         {
             int value;
