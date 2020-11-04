@@ -1,13 +1,23 @@
 <template>
-  <q-page class="q-pa-md bg-grey-2 ">
+  <q-page class="q-pa-md row items-start q-gutter-md ">
     <q-card>
       <q-card-section>
         <div class="text-h6 text-grey-8 text-weight-bolder">
-          Bar Chart
+          Eventos por sensor
         </div>
       </q-card-section>
       <q-card-section class="q-pa-none echarts">
-        <IEcharts :option="barChartOption" :resizable="true" />
+        <IEcharts :option="barChartOption.eventsBySensor" :resizable="true" />
+      </q-card-section>
+    </q-card>
+    <q-card>
+      <q-card-section>
+        <div class="text-h6 text-grey-8 text-weight-bolder">
+          Eventos por Região
+        </div>
+      </q-card-section>
+      <q-card-section class="q-pa-none echarts">
+        <IEcharts :option="barChartOption.eventsByRegion" :resizable="true" />
       </q-card-section>
     </q-card>
   </q-page>
@@ -20,35 +30,62 @@ export default {
   data () {
     return {
       barChartOption: {
-        grid: {
-          bottom: '25%'
-        },
-        legend: {},
-        tooltip: {},
-        dataset: {
-          dimensions: ['product', '2015', '2016', '2017'],
-          source: [
-            { product: 'Matcha Latte', 2015: 150.3, 2016: 85.8, 2017: 93.7 },
-            { product: 'Milk Tea', 2015: 83.1, 2016: 73.4, 2017: 55.1 },
-            { product: 'Cheese Cocoa', 2015: 86.4, 2016: 65.2, 2017: 82.5 },
-            { product: 'Walnut Brownie', 2015: 72.4, 2016: 53.9, 2017: 39.1 }
+        eventsBySensor: {
+          grid: {
+            bottom: '50%'
+          },
+          animation: false,
+          legend: {},
+          tooltip: {},
+          dataset: {
+            dimensions: ['device', 'events'],
+            source: [
+              { device: 'brasil.sudeste.sensor01', events: 700 },
+              { device: 'brasil.sudeste.sensor02', events: 300 }
+            ]
+          },
+          xAxis:
+            {
+              type: 'category',
+              axisLabel: {
+                rotate: 90
+              }
+            },
+          yAxis: {},
+          // Declare several bar series, each will be mapped
+          // to a column of dataset.source by default.
+          series: [
+            { type: 'bar' }
           ]
         },
-        xAxis:
-          {
-            type: 'category',
-            axisLabel: {
-              rotate: 45
-            }
+        eventsByRegion: {
+          grid: {
+            bottom: '50%'
           },
-        yAxis: {},
-        // Declare several bar series, each will be mapped
-        // to a column of dataset.source by default.
-        series: [
-          { type: 'bar' },
-          { type: 'bar' },
-          { type: 'bar' }
-        ]
+          animation: false,
+          legend: {},
+          tooltip: {},
+          dataset: {
+            dimensions: ['device', 'events'],
+            source: [
+              { device: 'brasil.sudeste', events: 1000 },
+              { device: 'brasil.sul', events: 1500 }
+            ]
+          },
+          xAxis:
+            {
+              type: 'category',
+              axisLabel: {
+                rotate: 90
+              }
+            },
+          yAxis: {},
+          // Declare several bar series, each will be mapped
+          // to a column of dataset.source by default.
+          series: [
+            { type: 'bar' }
+          ]
+        }
       }
     }
   },
@@ -59,7 +96,7 @@ export default {
 </script>
 <style scoped>
   .echarts {
-    width: 400px;
+    width: 460px;
     height: 400px;
   }
 </style>

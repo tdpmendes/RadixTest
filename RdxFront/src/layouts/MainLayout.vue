@@ -12,10 +12,9 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Painel de Relatórios - Rdx Front
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -54,7 +53,7 @@ const linksData = [
     title: 'Events',
     caption: 'View data about Events',
     icon: 'analytics',
-    link: 'Events'
+    link: '/#/events'
   }
 ]
 
