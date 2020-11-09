@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using RdxServer.Business;
 using RdxServer.Business.Interfaces;
@@ -54,6 +55,7 @@ namespace RdxServer.Controllers
         }
 
         // GET api/report
+        [EnableCors("AllowOrigin")]
         [HttpGet("/report")]
         public async Task<ActionResult<EventGraphDTO>> Report()
         {

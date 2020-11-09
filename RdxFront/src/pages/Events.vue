@@ -13,7 +13,7 @@
     <q-card>
       <q-card-section>
         <div class="text-h6 text-grey-8 text-weight-bolder">
-          Eventos por Região
+          Eventos por região
         </div>
       </q-card-section>
       <q-card-section class="q-pa-none echarts">
@@ -22,8 +22,11 @@
     </q-card>
   </q-page>
 </template>
+
 <script>
 import IEcharts from 'vue-echarts-v3/src/full.js'
+import { mapGetters } from 'vuex'
+import axiosInstance from 'axios'
 
 export default {
   name: 'Events',
@@ -39,10 +42,7 @@ export default {
           tooltip: {},
           dataset: {
             dimensions: ['label', 'events'],
-            source: [
-              { label: 'brasil.sudeste.sensor01', events: 700 },
-              { label: 'brasil.sudeste.sensor02', events: 300 }
-            ]
+            source: {} // this.events.eventsBySensor
           },
           xAxis:
             {
@@ -67,10 +67,7 @@ export default {
           tooltip: {},
           dataset: {
             dimensions: ['label', 'events'],
-            source: [
-              { label: 'brasil.sudeste', events: 1000 },
-              { label: 'brasil.sul', events: 1500 }
-            ]
+            source: {} // this.events.eventsByRegion
           },
           xAxis:
             {
@@ -88,6 +85,44 @@ export default {
         }
       }
     }
+  },
+  mounted () {
+    const self = this
+    setInterval(function () {
+      let eventsByRegion = {}
+      let eventsBySensor = {}
+      // var mockResponse = {
+      //   eventsBySensor: [
+      //     {
+      //       label: 'brasil.sudeste.sensor01',
+      //       events: 800
+      //     }
+      //   ],
+      //   eventsByRegion: [
+      //     {
+      //       label: 'brasil.sudeste',
+      //       events: 800
+      //     }
+      //   ]
+      // }
+      axiosInstance.get('https://localhost:32770/report', {
+        headers: {
+          'Content-type': 'application/json'
+        }
+      }).then((response) => {
+        debugger
+        eventsByRegion = response.data.eventsByRegion
+        eventsBySensor = response.data.eventsBySensor
+
+        if (self.barChartOption !== undefined) {
+          self.barChartOption.eventsBySensor.dataset.source = eventsBySensor
+          self.barChartOption.eventsByRegion.dataset.source = eventsByRegion
+        }
+      })
+    }, 10000)
+  },
+  computed: {
+    ...mapGetters('events', ['events'])
   },
   components: {
     IEcharts

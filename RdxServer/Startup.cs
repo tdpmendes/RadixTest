@@ -60,6 +60,12 @@ namespace RdxServer
                     Description = "Rdx Event Server"
                 });
             });
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
             services.ResolveDependencies();
         }
 
