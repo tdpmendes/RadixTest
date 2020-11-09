@@ -1,0 +1,2 @@
+- Tirar o hardcode de endpoints e valores e passar pra config
+- Entender como isolar os containers para finalizar a entrega
