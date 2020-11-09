@@ -88,29 +88,16 @@ export default {
   },
   mounted () {
     const self = this
-    setInterval(function () {
+    const time = 1000
+
+    const loadEvents = function () {
       let eventsByRegion = {}
       let eventsBySensor = {}
-      // var mockResponse = {
-      //   eventsBySensor: [
-      //     {
-      //       label: 'brasil.sudeste.sensor01',
-      //       events: 800
-      //     }
-      //   ],
-      //   eventsByRegion: [
-      //     {
-      //       label: 'brasil.sudeste',
-      //       events: 800
-      //     }
-      //   ]
-      // }
       axiosInstance.get('https://localhost:32770/report', {
         headers: {
           'Content-type': 'application/json'
         }
       }).then((response) => {
-        debugger
         eventsByRegion = response.data.eventsByRegion
         eventsBySensor = response.data.eventsBySensor
 
@@ -119,7 +106,14 @@ export default {
           self.barChartOption.eventsByRegion.dataset.source = eventsByRegion
         }
       })
-    }, 10000)
+    }
+
+    loadEvents()
+
+    window.timerId = setInterval(loadEvents, time)
+  },
+  destroyed () {
+    window.clearInterval(window.timerId)
   },
   computed: {
     ...mapGetters('events', ['events'])
