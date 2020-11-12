@@ -20,7 +20,7 @@ namespace RdxTests
         private IDeviceEventRepository repository;
         private IEventBusiness business;
         private IValidatable<DeviceEventDTO> validator;
-        private readonly string ConnectionString = "Server=127.0.0.1,1433;Database=RdxServerDB;User=sa;Password=@dm1n1str@t0r;MultipleActiveResultSets=true";
+        private readonly string ConnectionString = "Server=192.168.15.167,1433;Database=RdxServerDB;User=sa;Password=@dm1n1str@t0r;MultipleActiveResultSets=true";
 
         private string testTag = "brasil.sudeste.testSensor01";
 
