@@ -1,4 +1,4 @@
-FROM node:9-slim
+FROM node:10-slim
 
 USER root
 
@@ -14,7 +14,7 @@ RUN mkdir /home/node/app
 WORKDIR /home/node/app
 
 COPY package*.json ./
-# error python
+# error p
 RUN npm install
 
 COPY . .

@@ -1,0 +1,18 @@
+version: '3'
+services: 
+  rdxDb:
+    image: mcr.microsoft.com/mssql/server
+    ports: 
+      - 3009:3009
+  rdxDevice: 
+    image: rdxdevice:dev
+    ports: 
+      - 3011:3011
+  rdxServer:
+    image: rdxserver:dev
+    ports: 
+      - 3012:3012
+  rdxFront:
+    image: rdx-front:1.0
+    ports: 
+      - 3010:3010
