@@ -1,18 +1,47 @@
 version: '3'
 services: 
   rdxDb:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/mssql/server:2019-latest
     ports: 
-      - 3009:3009
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=@dm1n1str@t0r
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   rdxDevice: 
     image: rdxdevice:dev
+    #dockerfile: RdxDevice/Dockerfile
     ports: 
       - 3011:3011
+    depends_on:
+      - rdxDb
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2;/root/.nuget/fallbackpackages3;
+      - NUGET_PACKAGES=/root/.nuget/fallbackpackages3
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   rdxServer:
     image: rdxserver:dev
+    #dockerfile: RdxServer/Dockerfile
     ports: 
       - 3012:3012
+    depends_on:
+      - rdxDb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_VERSION=2.1.30
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2;/root/.nuget/fallbackpackages3
+      - NUGET_PACKAGES=/root/.nuget/fallbackpackages3
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   rdxFront:
     image: rdx-front:1.0
     ports: 
-      - 3010:3010
+      - 3010:8080
+    environment:
+      - BASEURL=localhost:3012

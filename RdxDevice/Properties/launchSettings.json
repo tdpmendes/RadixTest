@@ -7,7 +7,14 @@
       }
     },
     "Docker": {
-      "commandName": "Docker"
+      "commandName": "Docker",
+      "environmentVariables": {
+        "COUNTRY": "brasil",
+        "REGION": "sul",
+        "MAX_VAL_TO_SEND": "5000",
+        "MIN_VAL_TO_SEND": "1",
+        "DEVICE_NAME": "sensor01"
+      }
     }
   }
 }

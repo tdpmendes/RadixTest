@@ -93,7 +93,9 @@ export default {
     const loadEvents = function () {
       let eventsByRegion = {}
       let eventsBySensor = {}
-      axiosInstance.get('https://localhost:32770/report', {
+      // console.log(process.env.ENDPOINT)
+      //  'https://localhost:32770/report'
+      axiosInstance.get(process.env.ENDPOINT, {
         headers: {
           'Content-type': 'application/json'
         }

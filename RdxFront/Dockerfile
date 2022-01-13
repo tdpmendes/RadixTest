@@ -1,24 +1,15 @@
-FROM node:10-slim
-
-USER root
-
-RUN apt-get update || : && apt-get install python -y
-
-RUN npm install -g @quasar/cli && \
-    npm install -g @vue/cli && \
-    npm install -g @vue/cli-init 
-
-RUN mkdir /home/node/app
-
-# VOLUME [ "/home/node/app" ]
-WORKDIR /home/node/app
-
+# develop stage
+FROM node:13.14-alpine as develop-stage
+WORKDIR /app
 COPY package*.json ./
-# error p
-RUN npm install
-
+RUN yarn global add @quasar/cli
 COPY . .
-
-EXPOSE 8080
-
-CMD [ "quasar", "dev" ]
+# build stage
+FROM develop-stage as build-stage
+RUN yarn
+RUN quasar build
+# production stage
+FROM nginx:1.17.5-alpine as production-stage
+COPY --from=build-stage /app/dist/spa /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

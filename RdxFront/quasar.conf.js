@@ -47,6 +47,9 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
+      env: {
+        ENDPOINT: 'https://192.168.0.101:49159/report'
+      },
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
