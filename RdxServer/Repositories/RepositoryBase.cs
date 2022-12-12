@@ -61,7 +61,6 @@ namespace RdxServer.Repositories
             return await Db.SaveChangesAsync();
         }
 
-
         public void Dispose()
         {
             Db?.Dispose();
